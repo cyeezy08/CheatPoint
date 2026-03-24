@@ -20,12 +20,13 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 ## Screenshots
 
 <p align="center">
-  <img src="assets/cheat1.png" width="400" alt="FormAI Screenshot 1" />
-  &nbsp;&nbsp;&nbsp;
   <img src="assets/cheat2.png" width="400" alt="FormAI Screenshot 2" />
 </p>
 
 ---
+
+[Watch the demo video]
+https://drive.google.com/file/d/YOUR_FILE_ID/view](https://drive.google.com/file/d/1s1z9gfkzfDpGSf0uRJLYCwWZ4TkaXNCm/view?usp=sharing
 
 ## Installation (Developer Mode)
 
@@ -51,8 +52,8 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 2. Click the FormAI icon.
 3. On the **Fill** tab, add context if desired:
    > "I am a 22-year-old software engineering student from Malaysia"
-4. Click **Scan Page for Fields** — detected fields will highlight green.
-5. Click **Generate & Fill** — AI generates answers.
+4. Click **Scan Page for Fields** detected fields will highlight green.
+5. Click **Generate & Fill** AI generates answers.
 6. Review the preview, then click **Apply to Form**.
 7. Double-check everything before submitting.
 
@@ -74,7 +75,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 
 - Cannot bypass CAPTCHA.
 - Some heavily JavaScript forms may require a refresh.
-- AI answers may not be perfect — review before submitting.
+- AI answers may not be perfect review before submitting.
 - Google Forms uses custom inputs, so results may vary.
 
 ---
