@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CheatPoint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #161a24;
+    --surface2: #1e2435;
+    --border: #2a3147;
+    --accent: #4fffb0;
+    --accent-dim: rgba(79,255,176,0.12);
+    --accent2: #7c6dfa;
+    --text: #e8ecf4;
+    --muted: #6b7499;
+    --danger: #ff6b6b;
+    --warning: #ffd166;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 380px;
+    min-height: 480px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #0d0f14 0%, #161a24 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(79,255,176,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .logo {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    flex-shrink: 0;
+    box-shadow: 0 0 16px rgba(79,255,176,0.4);
+  }
+  .header-text h1 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .header-text p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+  .status-dot {
+    margin-left: auto;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .status-dot.connected { background: var(--accent); box-shadow: 0 0 8px rgba(79,255,176,0.6); }
+  .status-dot.error { background: var(--danger); }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .tab {
+    flex: 1;
+    padding: 9px 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    letter-spacing: 0.3px;
+  }
+  .tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .tab:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 14px 16px; }
+  .panel.active { display: block; }
+
+  /* ── FORM ELEMENTS ── */
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  input, select, textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 11px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,255,176,0.1);
+  }
+  input[type="password"] { font-family: monospace; letter-spacing: 2px; }
+  select option { background: var(--surface2); }
+  .field-group { margin-bottom: 12px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 4px 16px rgba(79,255,176,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(79,255,176,0.35); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.4; transform: none; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-danger {
+    background: rgba(255,107,107,0.12);
+    color: var(--danger);
+    border: 1px solid rgba(255,107,107,0.3);
+  }
+  .btn-danger:hover { background: rgba(255,107,107,0.2); }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge-green { background: rgba(79,255,176,0.12); color: var(--accent); }
+  .badge-purple { background: rgba(124,109,250,0.15); color: var(--accent2); }
+  .badge-red { background: rgba(255,107,107,0.12); color: var(--danger); }
+  .badge-yellow { background: rgba(255,209,102,0.12); color: var(--warning); }
+
+  /* ── FIELD LIST ── */
+  .field-list {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+  .field-item {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .field-item:last-child { border-bottom: none; }
+  .field-type {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+    text-transform: uppercase;
+  }
+  .field-label { font-size: 12px; color: var(--text); line-height: 1.4; }
+  .field-options { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── PROMPT BOX ── */
+  textarea {
+    resize: vertical;
+    min-height: 70px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── STATUS / ALERT ── */
+  .alert {
+    padding: 9px 12px;
+    border-radius: 7px;
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.5;
+    display: none;
+  }
+  .alert.show { display: flex; gap: 7px; align-items: flex-start; }
+  .alert-info { background: rgba(79,255,176,0.1); border: 1px solid rgba(79,255,176,0.25); color: var(--accent); }
+  .alert-error { background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.25); color: var(--danger); }
+  .alert-loading { background: rgba(124,109,250,0.1); border: 1px solid rgba(124,109,250,0.25); color: var(--accent2); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+  /* ── SPINNER ── */
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(79,255,176,0.3);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── SCROLL ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ── ANSWER PREVIEW ── */
+  .answer-list { margin-top: 8px; }
+  .answer-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+  .answer-q { color: var(--muted); margin-bottom: 3px; font-size: 11px; }
+  .answer-a { color: var(--accent); font-weight: 500; }
+
+  /* ── MODEL LIST ── */
+  .model-search { margin-bottom: 8px; }
+
+  /* ── KEY VISIBILITY TOGGLE ── */
+  .input-group { position: relative; }
+  .input-group input { padding-right: 36px; }
+  .toggle-vis {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    font-size: 13px; padding: 2px;
+  }
+  .toggle-vis:hover { color: var(--accent); }
+
+  /* row buttons */
+  .btn-row { display: flex; gap: 8px; margin-top: 10px; }
+  .btn-row .btn { flex: 1; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .empty-state .icon { font-size: 28px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">AI</div>
+  <div class="header-text">
+    <h1>CheatPoint</h1>
+    <p>OpenRouter Auto-Fill</p>
+  </div>
+  <div class="status-dot" id="statusDot"></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="fill">⚡ Fill</div>
+  <div class="tab" data-tab="settings">⚙ Settings</div>
+  <div class="tab" data-tab="about">? About</div>
+</div>
+
+<!-- ═══════════════ FILL TAB ═══════════════ -->
+<div class="panel active" id="tab-fill">
+
+  <div class="field-group">
+    <label>Extra context / instructions (optional)</label>
+    <textarea id="userContext" placeholder="e.g. 'I am a 22 year old software engineering student from Malaysia. Answer professionally.'"></textarea>
+  </div>
+
+  <button class="btn btn-secondary" id="btnScan">
+    🔍 Scan Page for Fields
+  </button>
+
+  <div id="fieldListWrap" style="display:none">
+    <div class="divider"></div>
+    <div class="section-title" id="fieldCount">Detected Fields</div>
+    <div class="field-list" id="fieldList"></div>
+    <div class="btn-row" style="margin-top:12px">
+      <button class="btn btn-primary" id="btnFill" disabled>
+        ✨ Generate & Fill
+      </button>
+      <button class="btn btn-danger" id="btnClear" style="width:auto;padding:10px 14px">✕</button>
+    </div>
+  </div>
+
+  <div id="answerPreviewWrap" style="display:none">
+    <div class="divider"></div>
+    <div class="section-title">AI Answers Preview</div>
+    <div class="answer-list" id="answerList"></div>
+    <button class="btn btn-secondary" id="btnApply" style="margin-top:8px">
+      📝 Apply to Form
+    </button>
+  </div>
+
+  <div class="alert" id="fillAlert"></div>
+</div>
+
+<!-- ═══════════════ SETTINGS TAB ═══════════════ -->
+<div class="panel" id="tab-settings">
+
+  <div class="field-group">
+    <label>OpenRouter API Key</label>
+    <div class="input-group">
+      <input type="password" id="apiKey" placeholder="sk-or-v1-..." autocomplete="off" />
+      <button class="toggle-vis" id="toggleKey">👁</button>
+    </div>
+  </div>
+
+  <div class="field-group">
+    <label>AI Model</label>
+    <input type="text" id="modelSearch" class="model-search" placeholder="Search models..." />
+    <select id="modelSelect" size="6" style="height:auto; min-height:120px">
+      <optgroup label="🆓 [Deprecated Do Not Click]">
+        <option value="mistralai/mistral-7b-instruct:free">Mistral 7B Instruct (free)</option>
+        <option value="microsoft/phi-3-mini-128k-instruct:free">Phi-3 Mini 128K (free)</option>
+        <option value="google/gemma-2-9b-it:free">Gemma 2 9B IT (free)</option>
+        <option value="meta-llama/llama-3-8b-instruct:free">LLaMA 3 8B Instruct (free)</option>
+        <option value="meta-llama/llama-3.1-8b-instruct:free">LLaMA 3.1 8B Instruct (free)</option>
+        <option value="qwen/qwen-2-7b-instruct:free">Qwen2 7B Instruct (free)</option>
+        <option value="openchat/openchat-7b:free">OpenChat 7B (free)</option>
+        <option value="nousresearch/nous-capybara-7b:free">Nous Capybara 7B (free)</option>
+        <option value="huggingfaceh4/zephyr-7b-beta:free">Zephyr 7B Beta (free)</option>
+      </optgroup>
+      <optgroup label="💎 Paid [Deprecated As Well]">
+        <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+        <option value="anthropic/claude-3-haiku">Claude 3 Haiku</option>
+        <option value="google/gemini-flash-1.5">Gemini Flash 1.5</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <div class="field-group">
+    <label>Custom Model ID (override)</label>
+    <input type="text" id="customModel" placeholder="e.g. mistralai/mistral-7b-instruct:free" />
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btnSave">💾 Save Settings</button>
+    <button class="btn btn-secondary" id="btnTest">🔌 Test Key</button>
+  </div>
+
+  <div class="alert" id="settingsAlert"></div>
+</div>
+
+<!-- ═══════════════ ABOUT TAB ═══════════════ -->
+<div class="panel" id="tab-about">
+  <div class="empty-state">
+    <div class="icon">🤖 Developed By ChinYiZhe</div>
+    <strong style="color:var(--text);font-size:14px">CheatPoint v1.0</strong><br/><br/>
+    Auto-fill any webpage form using AI via OpenRouter.<br/><br/>
+    Supports Google Forms, regular HTML forms, radio buttons, dropdowns, checkboxes & text fields.<br/><br/>
+    <span style="color:var(--accent)">Free models available via OpenRouter.</span><br/>
+    Get your API key at <strong>openrouter.ai</strong><br/><br/>
+    <div class="divider"></div>
+    <div style="text-align:left;margin-top:8px">
+      <div class="badge badge-green" style="margin-bottom:6px">✓ Works on Google Forms</div><br/>
+      <div class="badge badge-green" style="margin-bottom:6px">✓ HTML input / textarea / select</div><br/>
+      <div class="badge badge-green" style="margin-bottom:6px">✓ Radio & Checkbox groups</div><br/>
+      <div class="badge badge-yellow">⚠ Does NOT bypass CAPTCHA</div>
+    </div>
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
