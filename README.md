@@ -25,8 +25,9 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 
 ---
 
-[Watch the demo video]
-https://drive.google.com/file/d/YOUR_FILE_ID/view](https://drive.google.com/file/d/1s1z9gfkzfDpGSf0uRJLYCwWZ4TkaXNCm/view?usp=sharing
+## Google Drive Demo Cuz Github wont let me upload a 25mb mp4 lol
+[Watch the demo video](https://drive.google.com/file/d/1s1z9gfkzfDpGSf0uRJLYCwWZ4TkaXNCm/view)
+
 
 ## Installation (Developer Mode)
 
