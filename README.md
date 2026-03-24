@@ -1,6 +1,6 @@
-# FormAI – Auto-Fill Any Form Using AI
+# CheatPoint – Auto-Fill Any Form Using AI 
 
-FormAI is a Chrome extension that automatically fills out forms on any webpage (Google Forms, surveys, sign-ups) using AI via OpenRouter's free models.  
+CheatPoint is a Chrome extension that automatically fills out forms on any webpage (Google Forms, surveys, sign-ups) using AI via OpenRouter's free models.  
 
 Built to save time and make repetitive form-filling easy, while letting you customize the AI context for personalized answers.
 
@@ -20,7 +20,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 ## Screenshots
 
 <p align="center">
-  <img src="assets/cheat2.png" width="400" alt="FormAI Screenshot 2" />
+  <img src="assets/cheat2.png" width="400" alt="Screenshot 2" />
 </p>
 
 ---
@@ -33,7 +33,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 
 1. Open Chrome and go to `chrome://extensions/`.
 2. Enable **Developer mode** (top right).
-3. Click **Load unpacked** and select the `form-ai-extension/` folder.
+3. Click **Load unpacked** and select the `cheatpoint-extension/` folder.
 4. The FormAI icon will appear in your toolbar ✅
 
 ---
@@ -41,7 +41,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 ## Setup
 
 1. Get a free API key from [OpenRouter](https://openrouter.ai) (Sign up → Dashboard → API Keys → Create Key).
-2. Click the FormAI icon in Chrome.
+2. Click the CheatPoint icon in Chrome.
 3. Go to **Settings**, paste your API key, and select a free model.
 4. Save settings and optionally **Test Key**.
 
@@ -50,7 +50,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 ## How to Use
 
 1. Open any webpage with a form.
-2. Click the FormAI icon.
+2. Click the CheatPoint icon.
 3. On the **Fill** tab, add context if desired:
    > "I am a 22-year-old software engineering student from Malaysia"
 4. Click **Scan Page for Fields** detected fields will highlight green.
@@ -91,7 +91,7 @@ Built to save time and make repetitive form-filling easy, while letting you cust
 
 ## Contributing
 
-If you want to help improve FormAI:
+If you want to help improve CheatPoint:
 
 1. Fork the repo
 2. Make your changes
@@ -103,4 +103,4 @@ Feel free to report issues or request new features via GitHub Issues.
 
 ## License
 
-MIT License
+MIT License To yo mama
