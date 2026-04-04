@@ -1,3 +1,4 @@
+# DEPRECATED NO LONGER IN PRODUCTION | THIS IS A ONCE OFF FOR FUN PROJECT NON-SEC RELATED
 # CheatPoint – Auto-Fill Any Form Using AI 
 
 CheatPoint is a Chrome extension that automatically fills out forms on any webpage (Google Forms, surveys, sign-ups) using AI via OpenRouter's free models.  
